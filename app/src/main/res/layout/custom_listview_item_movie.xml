@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+
+    <ImageView
+        android:id="@+id/imageView_poster_path"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_poster_path">
+
+        <ImageView
+            android:id="@+id/imageView_backdrop"
+            android:layout_width="176dp"
+            android:layout_height="186dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_movie_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="original_title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_heading_size" />
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="date"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/tv_original_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="original_language"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/tv_adult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="adult"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="tittle"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/tv_popularity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="popularity"
+            android:textSize="@dimen/text_sub_heading_size"/>
+
+        <TextView
+            android:id="@+id/tv_overview"
+            android:hint="overview"
+            android:textSize="@dimen/text_size"
+            android:textColor="@color/purple_700"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/tv_vote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="vote count"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_vote_avg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="vote average"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
