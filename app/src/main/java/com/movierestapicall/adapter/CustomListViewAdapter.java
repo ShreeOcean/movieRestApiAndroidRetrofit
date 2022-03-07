@@ -18,6 +18,11 @@ public class CustomListViewAdapter extends BaseAdapter {
     private List<MoviePopularResponse> list;
     private Context context;
 
+    public CustomListViewAdapter(List<MoviePopularResponse> list, Context context) {
+        this.list = list;
+        this.context = context;
+    }
+
     @Override
     public int getCount() {
         return list.size();
@@ -56,7 +61,7 @@ public class CustomListViewAdapter extends BaseAdapter {
 
         MoviePopularResponse moPoResData = list.get(i);
 
-        //tvAdult.setText(moPoResData.getResults().);
+//        tvAdult.setText(moPoResData.getResults().);
         return view;
     }
 }

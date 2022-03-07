@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface ApiName {
 
-        @GET("/movie/popular")
-        Call<List<MoviePopularResponse>> getPopularMovie(@Query("api_key") String cd852112b111a64a51cb4cade02819d8);
+        @GET("/3/movie/popular?")
+        Call<List<MoviePopularResponse>> getPopularMovie(@Query("api_key") String apiKey);
 //    @GET("/posts")
 //    Call<List<PostResposnse>> getPostsData();
 //
