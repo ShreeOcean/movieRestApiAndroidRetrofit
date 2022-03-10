@@ -1,6 +1,7 @@
 package com.movierestapicall.interfaces;
 
 import com.movierestapicall.response.MoviePopularResponse;
+import com.movierestapicall.response.pojo.PopularMovieResultsPOJO;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import retrofit2.http.Query;
 public interface ApiName {
 
         @GET("/3/movie/popular?")
-        Call<List<MoviePopularResponse>> getPopularMovie(@Query("api_key") String apiKey);
+        Call<List<PopularMovieResultsPOJO>> getPopularMovie(@Query("api_key") String apiKey);
 //    @GET("/posts")
 //    Call<List<PostResposnse>> getPostsData();
 //
