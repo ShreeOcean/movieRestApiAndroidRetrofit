@@ -20,16 +20,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
 
-        homeBinding.popularMovieBtn.setOnClickListener(this);
+        homeBinding.popularMovieBtn.setOnClickListener(this::onClick);
+        homeBinding.trendingBtn.setOnClickListener(this::onClick);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.trending_btn:
-                Log.d("Trending Now", "onClick: ------------------");
-                Intent i = new Intent(HomeActivity.this, TrendingActivity.class);
-                startActivity(i);
+                //Log.d("Trending Now", "onClick: ------------------");
+                //Intent i = new Intent(HomeActivity.this, TrendingActivity.class);
+                startActivity(new Intent(HomeActivity.this, TrendingActivity.class));
                 break;
             case R.id.popular_movie_btn:
                 startActivity(new Intent(HomeActivity.this, MainActivity.class));
