@@ -19,6 +19,13 @@ public class MoviePopularResponse {
     @SerializedName("total_results")
     private int PopularMoviesTotalResults;
 
+    public MoviePopularResponse(int popularMoviesPage, List<PopularMovieResultsPOJO> popularMoviesResult, int popularMoviesTotalPages, int popularMoviesTotalResults) {
+        PopularMoviesPage = popularMoviesPage;
+        PopularMoviesResult = popularMoviesResult;
+        PopularMoviesTotalPages = popularMoviesTotalPages;
+        PopularMoviesTotalResults = popularMoviesTotalResults;
+    }
+
     public int getPopularMoviesPage() {
         return PopularMoviesPage;
     }

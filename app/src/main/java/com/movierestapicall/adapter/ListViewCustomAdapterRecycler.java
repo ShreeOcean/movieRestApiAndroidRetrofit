@@ -41,21 +41,21 @@ public class ListViewCustomAdapterRecycler extends RecyclerView.Adapter<ListView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        List<PopularMovieResultsPOJO> list = new ArrayList<>();
+        //List<PopularMovieResultsPOJO> list = new ArrayList<>();
         String imagePoster = Utility.IMAGE_BASE_URL + list.get(position).getPosterPath();
         String imageBackground = Utility.IMAGE_BASE_URL + list.get(position).getBackDropPath();
 
-        Glide.with(context).load(imagePoster).into(holder.movieBinding.imageViewPosterPath);
-        Glide.with(context).load(imageBackground).into(holder.movieBinding.imageViewBackdrop);
+        Glide.with(context).load(imageBackground).into(holder.movieBinding.imageViewPosterPath);
+        Glide.with(context).load(imagePoster).into(holder.movieBinding.imageViewBackdrop);
 
         holder.movieBinding.tvMovieTitle.setText(list.get(position).getOriginalTitle());
         holder.movieBinding.tvOriginalLanguage.setText("Original Language :  "+list.get(position).getOriginalLanguage());
         holder.movieBinding.tvReleaseDate.setText("Release Date :  "+list.get(position).getReleaseDate());
         holder.movieBinding.tvVoteCount.setText("Vote Count : "+list.get(position).getVoteCount());
         holder.movieBinding.tvVoteAvg.setText("Vote Avg. : " + list.get(position).getVoteAverage());
-//        holder.Rating.setText("" + Popularmovies.get(position).getVoteAverage());
-//        holder.MovieName.setText(Popularmovies.get(position).getOriginalTitle());
-//        holder.ReleaseDate.setText(Popularmovies.get(position).getReleaseDate());
+        holder.movieBinding.tvOverview.setText("Overview :"+ "\n"+ list.get(position).getOverView());
+        holder.movieBinding.tvPopularity.setText("Popularity : " + list.get(position).getPopularity());
+        //        holder.ReleaseDate.setText(Popularmovies.get(position).getReleaseDate());
 
     }
 

@@ -4,13 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20dp">
+    android:padding="15dp"
+    android:background="@drawable/round_corner"
+    android:layout_marginBottom="10dp">
 
 
     <ImageView
         android:id="@+id/imageView_poster_path"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/corner_for_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -26,8 +30,10 @@
 
         <ImageView
             android:id="@+id/imageView_backdrop"
-            android:layout_width="176dp"
-            android:layout_height="186dp" />
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/corner_for_image"
+            android:layout_margin="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,13 +45,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="original_title"
-                android:textColor="@color/black"
+                android:textColor="#84FFFF"
                 android:textSize="@dimen/text_heading_size" />
 
             <TextView
                 android:id="@+id/tv_release_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:hint="date"
                 android:textSize="@dimen/text_size" />
 
@@ -53,21 +60,26 @@
                 android:id="@+id/tv_original_language"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/white"
                 android:hint="original_language"
                 android:textSize="@dimen/text_size" />
-
+            <TextView
+                android:id="@+id/tv_popularity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="popularity"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
             <TextView
                 android:id="@+id/tv_adult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="adult"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"/>
 
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="tittle"
                 android:textSize="@dimen/text_size" />
 
         </LinearLayout>
@@ -82,18 +94,12 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <TextView
-            android:id="@+id/tv_popularity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="popularity"
-            android:textSize="@dimen/text_sub_heading_size"/>
-
-        <TextView
             android:id="@+id/tv_overview"
             android:hint="overview"
-            android:textSize="@dimen/text_size"
-            android:textColor="@color/purple_700"
-            android:textAlignment="center"
+            android:textSize="@dimen/text_sub_heading_size"
+            android:layout_margin="5dp"
+            android:textColor="@color/teal_200"
+            android:textAlignment="gravity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -101,18 +107,21 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:weightSum="2">
             <TextView
                 android:id="@+id/tv_vote_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="vote count"
+                android:textColor="#F4FF81"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/tv_vote_avg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="vote average"
+                android:textColor="#F4FF81"
                 android:layout_weight="1"/>
         </LinearLayout>
 

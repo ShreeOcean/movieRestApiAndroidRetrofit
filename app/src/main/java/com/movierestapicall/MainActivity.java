@@ -1,6 +1,7 @@
 package com.movierestapicall;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     CustomListViewAdapter listViewAdapter;
     ListViewCustomAdapterRecycler adapterRecycler;
-    List<PopularMovieResultsPOJO> popularMovieList = new ArrayList<>();
     RecyclerView popularMovie;
 
     @Override
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
-
+        mainBinding.recyclerViewFromMainActivity.setLayoutManager(new LinearLayoutManager(this));
         //popularMovie = mainBinding.recyclerViewFromMainActivity;
 
         progressDialog = new ProgressDialog(this);
@@ -47,48 +47,30 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
 
         ApiName apiName = RetrofitApi.getInstance(ApiName.class);
-        Call<List<PopularMovieResultsPOJO>> call =apiName.getPopularMovie(Utility.KEY);
-        call.enqueue(new Callback<List<PopularMovieResultsPOJO>>() {
+
+        Call<MoviePopularResponse> call =apiName.getPopularMovie(Utility.KEY);
+        call.enqueue(new Callback<MoviePopularResponse>() {
             @Override
-            public void onResponse(Call<List<PopularMovieResultsPOJO>> call, Response<List<PopularMovieResultsPOJO>> response) {
+            public void onResponse(Call<MoviePopularResponse> call, Response<MoviePopularResponse> response) {
                 if(response.isSuccessful() && response.code() == 200){
-                    List<PopularMovieResultsPOJO> popularMovieList = response.body();
-                    for (PopularMovieResultsPOJO popularMovie : popularMovieList){
+                    MoviePopularResponse popularMovieList = response.body();
+                    for (PopularMovieResultsPOJO popularMovie : popularMovieList.getPopularMoviesResult()){
                         progressDialog.dismiss();
-                        adapterRecycler = new ListViewCustomAdapterRecycler(MainActivity.this, popularMovieList);
+                        adapterRecycler = new ListViewCustomAdapterRecycler(MainActivity.this, popularMovieList.getPopularMoviesResult());
                         mainBinding.recyclerViewFromMainActivity.setAdapter(adapterRecycler);
+                        adapterRecycler.notifyDataSetChanged();
+
+                        Log.d("Popular Movie", "onResponse: " + popularMovie.getOriginalTitle());
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<List<PopularMovieResultsPOJO>> call, Throwable t) {
+            public void onFailure(Call<MoviePopularResponse> call, Throwable t) {
                 progressDialog.hide();
                 Utility.showLongToast(MainActivity.this, t.getMessage());
             }
         });
-//        Call<List<MoviePopularResponse>> call = apiName.getPopularMovie(Utility.KEY);
-//        call.enqueue(new Callback<List<MoviePopularResponse>>() {
-//            @Override
-//            public void onResponse(Call<List<MoviePopularResponse>> call, Response<List<MoviePopularResponse>> response) {
-//                if (response.isSuccessful() && response.code() == 200){
-//                    List<MoviePopularResponse> moviePopularResponses = response.body() ;
-//                    for (MoviePopularResponse popularResponse : moviePopularResponses){
-//                        progressDialog.hide();
-//
-////                        listViewAdapter =new CustomListViewAdapter( moviePopularResponses, getApplicationContext());
-////                        mainBinding.listViewMovie.setAdapter(listViewAdapter);
-////
-////                        Log.d("POPULAR MOVIE :", "onResponse: ------>" + popularResponse.getPage() + "\n" + popularResponse.getResults());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<MoviePopularResponse>> call, Throwable t) {
-//                progressDialog.hide();
-//                Utility.showLongToast(MainActivity.this, t.getMessage());
-//            }
-//        });
+
     }
 }
