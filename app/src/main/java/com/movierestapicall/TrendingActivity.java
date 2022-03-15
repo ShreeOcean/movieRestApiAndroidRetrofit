@@ -32,9 +32,12 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        //progressDialog.show();
 
         trendingBinding.textBtnTrendingAll.setOnClickListener(this);
+        trendingBinding.textBtnTrendingTv.setOnClickListener(this);
+        trendingBinding.textBtnTrendingMovie.setOnClickListener(this);
+        trendingBinding.textBtnPerson.setOnClickListener(this);
 
 //        ApiName apiName = RetrofitApi.getInstance(ApiName.class);
 //        Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
@@ -62,11 +65,20 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
             case R.id.textBtnTrendingAll:
                 replaceTrendActivityToTrendindAllFrag(new TrendingAllFrag());
                 break;
+            case R.id.textBtnPerson:
+
+                break;
+            case R.id.textBtnTrendingTv:
+
+                break;
+            case R.id.textBtnTrendingMovie:
+
+                break;
         }
     }
 
     private void replaceTrendActivityToTrendindAllFrag(TrendingAllFrag trendingAllFrag) {
-
+        progressDialog.dismiss();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container_view_tag_of_trending, trendingAllFrag);

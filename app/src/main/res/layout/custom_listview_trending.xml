@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:background="@drawable/round_corner"
+    android:layout_marginBottom="10dp">
 
+
+    <ImageView
+        android:id="@+id/imageView_poster_path_trending"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/corner_for_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_poster_path_trending">
+
+        <ImageView
+            android:id="@+id/imageView_backdrop_trending"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/corner_for_image"
+            android:layout_margin="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_trending_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="original_title"
+                android:textColor="#84FFFF"
+                android:textSize="@dimen/text_heading_size" />
+
+            <TextView
+                android:id="@+id/tv_release_date_trending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:hint="date"
+                android:textSize="@dimen/text_size" />
+
+            <TextView
+                android:id="@+id/tv_original_language_trending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:hint="original_language"
+                android:textSize="@dimen/text_size" />
+            <TextView
+                android:id="@+id/tv_popularity_trending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="popularity"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/tv_adult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"/>
+
+            <TextView
+                android:id="@+id/tv_title_trending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/tv_overview_trending"
+            android:hint="overview"
+            android:textSize="@dimen/text_sub_heading_size"
+            android:layout_margin="5dp"
+            android:textColor="@color/teal_200"
+            android:textAlignment="gravity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:weightSum="2">
+            <TextView
+                android:id="@+id/tv_vote_count_trending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="vote count"
+                android:textColor="#F4FF81"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/tv_vote_avg_trending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="vote average"
+                android:textColor="#F4FF81"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

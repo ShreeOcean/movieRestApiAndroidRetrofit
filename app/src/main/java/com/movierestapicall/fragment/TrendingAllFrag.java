@@ -1,66 +1,85 @@
 package com.movierestapicall.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.movierestapicall.PopularMovieActivity;
 import com.movierestapicall.R;
+import com.movierestapicall.RetrofitApi;
+import com.movierestapicall.TrendingActivity;
+import com.movierestapicall.adapter.TrendingAllRecyclerAdapter;
+import com.movierestapicall.databinding.FragmentTrendingAllBinding;
+import com.movierestapicall.interfaces.ApiName;
+import com.movierestapicall.response.TrendingResponse;
+import com.movierestapicall.response.pojo.TrendingResultsPOJO;
+import com.movierestapicall.utility.Utility;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TrendingAllFrag#newInstance} factory method to
- * create an instance of this fragment.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class TrendingAllFrag extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public TrendingAllFrag() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TrendingAllFrag.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TrendingAllFrag newInstance(String param1, String param2) {
-        TrendingAllFrag fragment = new TrendingAllFrag();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private TrendingAllRecyclerAdapter recyclerAdapter;
+    ProgressDialog progressDialog;
+    Context context;
+    TrendingResponse trendingResponse;
+    FragmentTrendingAllBinding trendingAllBinding;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_trending_all, container, false);
+        trendingAllBinding = FragmentTrendingAllBinding.inflate(inflater, container, false);
+        //return inflater.inflate(R.layout.fragment_trending_all, container, false);
+        return trendingAllBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        trendingAllBinding.recyclerViewFromTrendingAll.setVisibility(View.VISIBLE);
+        trendingAllBinding.recyclerViewFromTrendingAll.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ApiName apiName = RetrofitApi.getInstance(ApiName.class);
+        Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
+        call.enqueue(new Callback<TrendingResponse>() {
+            @Override
+            public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
+                if(response.isSuccessful() && response.code() == 200){
+                    trendingResponse = (TrendingResponse) response.body();
+                    for (TrendingResultsPOJO trendingResultsPOJO : trendingResponse.getTrendingResult()) {
+                        progressDialog.dismiss();
+                        recyclerAdapter = new TrendingAllRecyclerAdapter(context, trendingResponse.getTrendingResult());
+                        trendingAllBinding.recyclerViewFromTrendingAll.setAdapter(recyclerAdapter);
+                        recyclerAdapter.notifyDataSetChanged();
+
+                        Log.d("Trending All Frag", "onResponse: " + trendingResultsPOJO.getOriginalTitle());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrendingResponse> call, Throwable t) {
+                progressDialog.hide();
+                Utility.showLongToast(context, t.getMessage());
+            }
+        });
+
     }
 }

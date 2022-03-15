@@ -10,23 +10,20 @@ import android.util.Log;
 
 import com.movierestapicall.adapter.CustomListViewAdapter;
 import com.movierestapicall.adapter.ListViewCustomAdapterRecycler;
-import com.movierestapicall.databinding.ActivityMainBinding;
+import com.movierestapicall.databinding.ActivityPopularMovieBinding;
+import com.movierestapicall.databinding.ActivityPopularMovieBinding;
 import com.movierestapicall.interfaces.ApiName;
 import com.movierestapicall.response.MoviePopularResponse;
 import com.movierestapicall.response.pojo.PopularMovieResultsPOJO;
 import com.movierestapicall.utility.Utility;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
-public class MainActivity extends AppCompatActivity {
+public class PopularMovieActivity extends AppCompatActivity {
 
-    ActivityMainBinding mainBinding;
+    ActivityPopularMovieBinding mainBinding;
     ProgressDialog progressDialog;
     CustomListViewAdapter listViewAdapter;
     ListViewCustomAdapterRecycler adapterRecycler;
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        mainBinding = ActivityPopularMovieBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
         mainBinding.recyclerViewFromMainActivity.setLayoutManager(new LinearLayoutManager(this));
         //popularMovie = mainBinding.recyclerViewFromMainActivity;
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     MoviePopularResponse popularMovieList = response.body();
                     for (PopularMovieResultsPOJO popularMovie : popularMovieList.getPopularMoviesResult()){
                         progressDialog.dismiss();
-                        adapterRecycler = new ListViewCustomAdapterRecycler(MainActivity.this, popularMovieList.getPopularMoviesResult());
+                        adapterRecycler = new ListViewCustomAdapterRecycler(PopularMovieActivity.this, popularMovieList.getPopularMoviesResult());
                         mainBinding.recyclerViewFromMainActivity.setAdapter(adapterRecycler);
                         adapterRecycler.notifyDataSetChanged();
 
@@ -68,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<MoviePopularResponse> call, Throwable t) {
                 progressDialog.hide();
-                Utility.showLongToast(MainActivity.this, t.getMessage());
+                Utility.showLongToast(PopularMovieActivity.this, t.getMessage());
             }
         });
 
