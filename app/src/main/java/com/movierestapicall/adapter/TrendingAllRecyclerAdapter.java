@@ -44,6 +44,11 @@ public class TrendingAllRecyclerAdapter extends RecyclerView.Adapter<TrendingAll
         Glide.with(context).load(imageBackground).into(holder.trendingBinding.imageViewPosterPathTrending);
         Glide.with(context).load(imagePoster).into(holder.trendingBinding.imageViewBackdropTrending);
 
+        holder.trendingBinding.tvOverviewTrending.setText(list.get(position).getOverview());
+        holder.trendingBinding.tvTitleTrending.setText(list.get(position).getTitle());
+        holder.trendingBinding.tvTrendingTitle.setText(list.get(position).getOriginalTitle());
+       // holder.trendingBinding.tvPopularityTrending.setText(list.get(position).getPopularity());
+
     }
 
     @Override
