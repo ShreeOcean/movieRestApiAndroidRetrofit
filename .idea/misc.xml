@@ -11,7 +11,10 @@
         <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/activity_trending.xml" value="0.16666666666666666" />
         <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/custom_listview_item_movie.xml" value="0.16666666666666666" />
         <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/custom_listview_trending.xml" value="0.1578125" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/fragment_trend_movie.xml" value="0.1578125" />
         <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/fragment_trending_all.xml" value="0.1578125" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/fragment_trending_person.xml" value="0.1578125" />
+        <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/layout/fragment_trending_t_v.xml" value="0.1578125" />
         <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.167" />
         <entry key="..\:/ChetuTrainingTaskAndroid/MovieRestApiCall/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.167" />
       </map>
