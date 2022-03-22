@@ -74,13 +74,16 @@
                 android:id="@+id/tv_adult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size"/>
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/white"
+                />
 
             <TextView
                 android:id="@+id/tv_title_trending"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size" />
+                android:textSize="@dimen/text_size"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
     </LinearLayout>

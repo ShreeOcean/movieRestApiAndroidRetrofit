@@ -16,6 +16,7 @@ import com.movierestapicall.response.pojo.TrendingResultsPOJO;
 import com.movierestapicall.utility.Utility;
 
 import java.util.List;
+import java.util.Locale;
 
 
 public class TrendingAllRecyclerAdapter extends RecyclerView.Adapter<TrendingAllRecyclerAdapter.MyViewHolder> {
@@ -52,7 +53,8 @@ public class TrendingAllRecyclerAdapter extends RecyclerView.Adapter<TrendingAll
         holder.trendingBinding.tvReleaseDateTrending.setText("Relesed Date : " + list.get(position).getReleaseDate());
         holder.trendingBinding.tvVoteCountTrending.setText("Vote Count : "+list.get(position).getVoteCount());
         holder.trendingBinding.tvVoteAvgTrending.setText("Vote Avg. : " + list.get(position).getVoteAverage());
-
+        holder.trendingBinding.tvAdult.setText("Media Type : "+list.get(position).getMediaType().toUpperCase(Locale.ROOT));
+        holder.trendingBinding.tvTitleTrending.setText("Name : "+ list.get(position).getTitle());
     }
 
     @Override

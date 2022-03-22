@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.movierestapicall.databinding.ActivityHomeBinding;
 
@@ -35,7 +36,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.popular_person_btn:
                 startActivity(new Intent(HomeActivity.this, PopularPersonActivity.class));
-
+                break;
+            case R.id.rate_movie_btn:
+                Toast.makeText(this, "THIS FEATURE IS COMING SOON ...", Toast.LENGTH_LONG).show();
+                break;
         }
     }
 }

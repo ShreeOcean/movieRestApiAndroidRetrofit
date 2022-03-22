@@ -41,7 +41,6 @@ public class TrendingPersonRecyclerAdapter extends RecyclerView.Adapter<Trending
         Glide.with(context).load(profileDP).into(holder.itemBinding.imageViewPopularPerson);
 
         holder.itemBinding.textViewTrendingPeopleName.setText(personResultsPOJOList.get(position).getName());
-//        holder.itemBinding.textViewTrendingPeopleWork.setText((CharSequence) personResultsPOJOList.get(position).getKnownFor());
         holder.itemBinding.textViewTrendingPeopleWork.setText("Profession : " + personResultsPOJOList.get(position).getKnownForDepartment());
     }
 

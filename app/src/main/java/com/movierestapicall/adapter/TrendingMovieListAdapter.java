@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.movierestapicall.databinding.CustomListviewItemMovieBinding;
 import com.movierestapicall.response.pojo.TrendingMoviePojo;
+import com.movierestapicall.utility.Utility;
 
 import java.util.List;
 
@@ -34,7 +36,20 @@ public class TrendingMovieListAdapter extends RecyclerView.Adapter<TrendingMovie
 
     @Override
     public void onBindViewHolder(@NonNull TrendingMovieListAdapter.MyViewHolder holder, int position) {
-        holder.movieBinding.tvMovieTitle.setText(list.get(position).getTitle());
+
+        String backgroundImage = Utility.IMAGE_BASE_URL + list.get(position).getBackdropPath();
+        String posterImage = Utility.IMAGE_BASE_URL + list.get(position).getPosterPath();
+        Glide.with(context).load(posterImage).into(holder.movieBinding.imageViewBackdrop);
+        Glide.with(context).load(backgroundImage).into(holder.movieBinding.imageViewPosterPath);
+
+        holder.movieBinding.tvMovieTitle.setText(list.get(position).getOriginalTitle());
+        holder.movieBinding.tvPopularity.setText("Popularity :  " + list.get(position).getPopularity().toString());
+        holder.movieBinding.tvTitle.setText("Title : " + list.get(position).getTitle());
+        holder.movieBinding.tvOverview.setText("Overview : " +"\n"+ list.get(position).getOverview());
+        holder.movieBinding.tvVoteAvg.setText("Vote Avg : " + list.get(position).getVoteAverage());
+        holder.movieBinding.tvVoteCount.setText("Vote Count : " + list.get(position).getVoteCount());
+        holder.movieBinding.tvReleaseDate.setText("Release Date : " + list.get(position).getReleaseDate());
+        holder.movieBinding.tvOriginalLanguage.setText("Original Language : " + list.get(position).getOriginalLanguage().toUpperCase());
     }
 
     @Override
@@ -47,6 +62,7 @@ public class TrendingMovieListAdapter extends RecyclerView.Adapter<TrendingMovie
         CustomListviewItemMovieBinding movieBinding;
         public MyViewHolder(CustomListviewItemMovieBinding itemView) {
             super(itemView.getRoot());
+            movieBinding = itemView;
         }
     }
 }
