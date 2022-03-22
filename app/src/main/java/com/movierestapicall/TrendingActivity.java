@@ -41,6 +41,8 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
         trendingBinding.textBtnTrendingTv.setOnClickListener(this);
         trendingBinding.textBtnTrendingMovie.setOnClickListener(this);
         trendingBinding.textBtnPerson.setOnClickListener(this);
+//        trendingBinding.textBtnTrendinaDay.setOnClickListener(this);
+//        trendingBinding.textBtnTrendinaWeek.setOnClickListener(this);
         replaceTrendActivityToTrendindAllFrag(new TrendingAllFrag());
 //        ApiName apiName = RetrofitApi.getInstance(ApiName.class);
 //        Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
@@ -101,7 +103,7 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
         progressDialog.dismiss();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container_view_tag_of_trending, trendingPersonFrag);
+        fragmentTransaction.replace(R.id.fragment_container_view_tag_of_trending, trendingPersonFrag);
         fragmentTransaction.commit();
     }
 
@@ -110,7 +112,7 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
         progressDialog.dismiss();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container_view_tag_of_trending, trendingAllFrag);
+        fragmentTransaction.replace(R.id.fragment_container_view_tag_of_trending, trendingAllFrag);
         fragmentTransaction.commit();
     }
 }

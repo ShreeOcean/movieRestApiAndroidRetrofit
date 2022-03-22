@@ -55,7 +55,6 @@ public class ListViewCustomAdapterRecycler extends RecyclerView.Adapter<ListView
         holder.movieBinding.tvVoteAvg.setText("Vote Avg. : " + list.get(position).getVoteAverage());
         holder.movieBinding.tvOverview.setText("Overview :"+ "\n"+ list.get(position).getOverView());
         holder.movieBinding.tvPopularity.setText("Popularity : " + list.get(position).getPopularity());
-        //        holder.ReleaseDate.setText(Popularmovies.get(position).getReleaseDate());
 
     }
 

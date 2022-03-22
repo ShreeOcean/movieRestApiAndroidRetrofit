@@ -20,6 +20,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         homeBinding.popularMovieBtn.setOnClickListener(this::onClick);
         homeBinding.trendingBtn.setOnClickListener(this::onClick);
+        homeBinding.popularPersonBtn.setOnClickListener(this::onClick);
+
     }
 
     @Override
@@ -31,6 +33,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.popular_movie_btn:
                 startActivity(new Intent(HomeActivity.this, PopularMovieActivity.class));
                 break;
+            case R.id.popular_person_btn:
+                startActivity(new Intent(HomeActivity.this, PopularPersonActivity.class));
 
         }
     }
