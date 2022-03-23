@@ -110,7 +110,6 @@ public class TrendingPersonFrag extends Fragment {
         });
 
         return personBinding.getRoot();
-        //return inflater.inflate(R.layout.fragment_trending_person, container, false);
     }
 
     @Override

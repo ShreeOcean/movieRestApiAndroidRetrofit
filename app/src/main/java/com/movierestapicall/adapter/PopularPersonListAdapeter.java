@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.movierestapicall.databinding.CustomTrendingPeopleListviewItemBinding;
+import com.movierestapicall.fragment.FragPopPersonDetails;
 import com.movierestapicall.response.PopularPersonResponse;
 import com.movierestapicall.response.pojo.PopularPersonResultsPOJO;
 import com.movierestapicall.utility.Utility;
@@ -36,13 +37,23 @@ public class PopularPersonListAdapeter extends RecyclerView.Adapter<PopularPerso
 
     @Override
     public void onBindViewHolder(@NonNull PopularPersonListAdapeter.MyViewHolder holder, int position) {
+
+
+
         String profileDP = Utility.IMAGE_BASE_URL + list.get(position).getProfilePath();
         Glide.with(context).load(profileDP).into(holder.itemBinding.imageViewPopularPerson);
 
         holder.itemBinding.textViewTrendingPeopleName.setText(list.get(position).getName());
         holder.itemBinding.textViewTrendingPeopleWork.setText("Profession : " + list.get(position).getKnownForDepartment());
 
+//        holder.itemView.setOnClickListener(view -> {
+//            replaceActivityToFrag(new FragPopPersonDetails(position));
+//        });
+
     }
+
+//    private void replaceActivityToFrag(FragPopPersonDetails fragPopPersonDetails) {
+//    }
 
     @Override
     public int getItemCount() {
