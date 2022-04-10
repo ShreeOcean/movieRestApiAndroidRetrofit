@@ -12,6 +12,7 @@ import com.movierestapicall.R;
 import com.movierestapicall.databinding.CustomListviewTrendingBinding;
 import com.movierestapicall.databinding.CustomTrendingPeopleListviewItemBinding;
 import com.movierestapicall.response.pojo.PopularPersonResultsPOJO;
+import com.movierestapicall.response.pojo.TrendingPopPerson;
 import com.movierestapicall.utility.Utility;
 import java.util.List;
 import android.content.Context;

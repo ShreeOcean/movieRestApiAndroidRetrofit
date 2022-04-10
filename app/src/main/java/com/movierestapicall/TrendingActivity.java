@@ -1,6 +1,7 @@
 package com.movierestapicall;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,6 +27,10 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
 
     ActivityTrendingBinding trendingBinding;
     ProgressDialog progressDialog;
+    TrendingAllFrag trendingAllFrag = new TrendingAllFrag();
+    TrendingPersonFrag trendingPersonFrag = new TrendingPersonFrag();
+    TrendingTVFrag trendingTVFrag = new TrendingTVFrag();
+    TrendMovieFrag trendMovieFrag = new TrendMovieFrag();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,78 +46,31 @@ public class TrendingActivity extends AppCompatActivity implements View.OnClickL
         trendingBinding.textBtnTrendingTv.setOnClickListener(this);
         trendingBinding.textBtnTrendingMovie.setOnClickListener(this);
         trendingBinding.textBtnPerson.setOnClickListener(this);
-//        trendingBinding.textBtnTrendinaDay.setOnClickListener(this);
-//        trendingBinding.textBtnTrendinaWeek.setOnClickListener(this);
-        replaceTrendActivityToTrendindAllFrag(new TrendingAllFrag());
-//        ApiName apiName = RetrofitApi.getInstance(ApiName.class);
-//        Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
-//        call.enqueue(new Callback<TrendingResponse>() {
-//            @Override
-//            public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
-//                if(response.isSuccessful() && response.code() == 200){
-//                    TrendingResponse trendingAllOfDay = response.body();
-//                    progressDialog.dismiss();
-//                    Log.d("Trending all of day", "onResponse: " + trendingAllOfDay.getTrendingResult());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<TrendingResponse> call, Throwable t) {
-//                progressDialog.hide();
-//                Utility.showLongToast(TrendingActivity.this, t.getMessage());
-//            }
-//        });
+        replaceFragment(new TrendingAllFrag());
     }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.textBtnTrendingAll:
-                replaceTrendActivityToTrendindAllFrag(new TrendingAllFrag());
+                replaceFragment(trendingAllFrag);
                 break;
             case R.id.textBtnPerson:
-                replaceTrendActivityToTrendingPersonFrag(new TrendingPersonFrag());
+                replaceFragment(trendingPersonFrag);
                 break;
             case R.id.textBtnTrendingTv:
-                replaceTrendActivityToTrendingTVFrag(new TrendingTVFrag());
+                replaceFragment(trendingTVFrag);
                 break;
             case R.id.textBtnTrendingMovie:
-                replaceTrendActivityToTrendindMovieFrag(new TrendMovieFrag());
+                replaceFragment(trendMovieFrag);
                 break;
         }
     }
 
-    private void replaceTrendActivityToTrendindMovieFrag(TrendMovieFrag trendMovieFrag) {
+    private void replaceFragment(Fragment fragment){
         progressDialog.dismiss();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container_view_tag_of_trending, trendMovieFrag);
-        fragmentTransaction.commit();
-    }
-
-    private void replaceTrendActivityToTrendingTVFrag(TrendingTVFrag trendingTVFrag) {
-        progressDialog.dismiss();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container_view_tag_of_trending, trendingTVFrag);
-        fragmentTransaction.commit();
-    }
-
-    private void replaceTrendActivityToTrendingPersonFrag(TrendingPersonFrag trendingPersonFrag) {
-
-        progressDialog.dismiss();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container_view_tag_of_trending, trendingPersonFrag);
-        fragmentTransaction.commit();
-    }
-
-    private void replaceTrendActivityToTrendindAllFrag(TrendingAllFrag trendingAllFrag) {
-
-        progressDialog.dismiss();
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container_view_tag_of_trending, trendingAllFrag);
-        fragmentTransaction.commit();
+        getSupportFragmentManager()
+                .beginTransaction().
+                replace(R.id.fragment_container_view_tag_of_trending,fragment)
+                .commit();
     }
 }

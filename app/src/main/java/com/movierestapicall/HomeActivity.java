@@ -19,9 +19,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         homeBinding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(homeBinding.getRoot());
 
-        homeBinding.popularMovieBtn.setOnClickListener(this::onClick);
-        homeBinding.trendingBtn.setOnClickListener(this::onClick);
-        homeBinding.popularPersonBtn.setOnClickListener(this::onClick);
+        homeBinding.popularMovieBtn.setOnClickListener(this);
+        homeBinding.trendingBtn.setOnClickListener(this);
+        homeBinding.popularPersonBtn.setOnClickListener(this);
+        homeBinding.rateMovieBtn.setOnClickListener(this);
 
     }
 

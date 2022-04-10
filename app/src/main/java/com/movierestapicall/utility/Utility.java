@@ -1,5 +1,6 @@
 package com.movierestapicall.utility;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -16,4 +17,5 @@ public class Utility {
     public static void showLongToast(Context context, String msg){
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
+
 }

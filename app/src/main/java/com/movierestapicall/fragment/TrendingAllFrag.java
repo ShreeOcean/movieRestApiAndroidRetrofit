@@ -44,66 +44,16 @@ public class TrendingAllFrag extends Fragment {
         // Inflate the layout for this fragment
         trendingAllBinding = FragmentTrendingAllBinding.inflate(inflater, container, false);
 
-        //return inflater.inflate(R.layout.fragment_trending_all, container, false);
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(false);
-        //progressDialog.show();
-
         trendingAllBinding.recyclerViewFromTrendingAll.setVisibility(View.VISIBLE);
         trendingAllBinding.recyclerViewFromTrendingAll.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ApiName apiName = RetrofitApi.getInstance(ApiName.class);
-
         trendingAllBinding.textBtnTrendinaDay.setOnClickListener(view -> {
-            Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
-        call.enqueue(new Callback<TrendingResponse>() {
-            @Override
-            public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
-                if(response.isSuccessful() && response.code() == 200){
-                    trendingResponse = (TrendingResponse) response.body();
-                    for (TrendingResultsPOJO trendingResultsPOJO : trendingResponse.getTrendingResult()) {
-                        progressDialog.dismiss();
-                        recyclerAdapter = new TrendingAllRecyclerAdapter(context, trendingResponse.getTrendingResult());
-                        trendingAllBinding.recyclerViewFromTrendingAll.setAdapter(recyclerAdapter);
-                        recyclerAdapter.notifyDataSetChanged();
-
-                        Log.d("Trending All Frag", "onResponse: " + trendingResultsPOJO.getOriginalTitle());
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<TrendingResponse> call, Throwable t) {
-                progressDialog.hide();
-                Utility.showLongToast(context, t.getMessage());
-            }
-        });
+            showProgressDialog();
+            callTrendingAllOfDay();
         });
         trendingAllBinding.textBtnTrendinaWeek.setOnClickListener(view -> {
-
-            Call<TrendingResponse> call = apiName.getTrendingAllOfWeek(Utility.KEY);
-            call.enqueue(new Callback<TrendingResponse>() {
-                @Override
-                public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
-                    if(response.isSuccessful() && response.code() == 200){
-                        trendingResponse = (TrendingResponse) response.body();
-                        for (TrendingResultsPOJO trendingResultsPOJO : trendingResponse.getTrendingResult()) {
-                            progressDialog.dismiss();
-                            recyclerAdapter = new TrendingAllRecyclerAdapter(context, trendingResponse.getTrendingResult());
-                            trendingAllBinding.recyclerViewFromTrendingAll.setAdapter(recyclerAdapter);
-                            recyclerAdapter.notifyDataSetChanged();
-
-                            Log.d("Trending All Frag", "onResponse: " + trendingResultsPOJO.getOriginalTitle());
-                        }
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<TrendingResponse> call, Throwable t) {
-
-                }
-            });
+            showProgressDialog();
+           callTrendingAllOfWeek();
         });
         return trendingAllBinding.getRoot();
 
@@ -113,17 +63,30 @@ public class TrendingAllFrag extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        showProgressDialog();
+        //mandatory if using recyclerview
+        trendingAllBinding.recyclerViewFromTrendingAll.setVisibility(View.VISIBLE);
+        trendingAllBinding.recyclerViewFromTrendingAll.setLayoutManager(new LinearLayoutManager(getActivity()));
+        callTrendingAllOfDay();
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = getActivity();
+    }
+
+    private void showProgressDialog(){
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Please wait...");
         progressDialog.setCancelable(false);
         progressDialog.show();
+    }
 
-        //mandatory if using recyclerview
-        trendingAllBinding.recyclerViewFromTrendingAll.setVisibility(View.VISIBLE);
-        trendingAllBinding.recyclerViewFromTrendingAll.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+    private void callTrendingAllOfWeek(){
         ApiName apiName = RetrofitApi.getInstance(ApiName.class);
-        Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
+        Call<TrendingResponse> call = apiName.getTrendingAllOfWeek(Utility.KEY);
         call.enqueue(new Callback<TrendingResponse>() {
             @Override
             public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
@@ -142,16 +105,38 @@ public class TrendingAllFrag extends Fragment {
 
             @Override
             public void onFailure(Call<TrendingResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void callTrendingAllOfDay(){
+        ApiName apiName = RetrofitApi.getInstance(ApiName.class);
+        Call<TrendingResponse> call = apiName.getTrendingAllOfDay(Utility.KEY);
+        call.enqueue(new Callback<TrendingResponse>() {
+            @Override
+            public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
+                if(response.isSuccessful() && response.code() == 200){
+
+                    trendingResponse = (TrendingResponse) response.body();
+
+                    for (TrendingResultsPOJO trendingResultsPOJO : trendingResponse.getTrendingResult()) {
+
+                        progressDialog.dismiss();
+                        recyclerAdapter = new TrendingAllRecyclerAdapter(context, trendingResponse.getTrendingResult());
+                        trendingAllBinding.recyclerViewFromTrendingAll.setAdapter(recyclerAdapter);
+                        recyclerAdapter.notifyDataSetChanged();
+
+                        Log.d("Trending All Frag", "onResponse: " + trendingResultsPOJO.getOriginalTitle());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TrendingResponse> call, Throwable t) {
                 progressDialog.hide();
                 Utility.showLongToast(context, t.getMessage());
             }
         });
-
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        this.context = getActivity();
     }
 }

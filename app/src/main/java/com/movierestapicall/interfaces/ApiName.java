@@ -3,7 +3,7 @@ package com.movierestapicall.interfaces;
 import com.movierestapicall.response.MoviePopularResponse;
 import com.movierestapicall.response.PopularPersonResponse;
 import com.movierestapicall.response.TrendingMovieResponse;
-import com.movierestapicall.response.TrendingPopularPerson;
+import com.movierestapicall.response.TrendingPopularPersonResponse;
 import com.movierestapicall.response.TrendingResponse;
 import com.movierestapicall.response.TrendingTVResponse;
 
@@ -35,10 +35,10 @@ public interface ApiName {
         Call<TrendingTVResponse> getTrendingTvOfWeek(@Query("api_key") String apikey);
 
         @GET("/3/trending/person/day")
-        Call<TrendingPopularPerson> getTrendingPersonOfDay(@Query("api_key") String apikey);
+        Call<PopularPersonResponse> getTrendingPersonOfDay(@Query("api_key") String apikey);
 
         @GET("/3/trending/person/week")
-        Call<TrendingPopularPerson> getTrendingPersonOfWeek(@Query("api_key") String apikey);
+        Call<PopularPersonResponse> getTrendingPersonOfWeek(@Query("api_key") String apikey);
 
         @GET("/3/person/popular")
         Call<PopularPersonResponse> getPopularPerson(@Query("api_key") String apikey);
